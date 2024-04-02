@@ -1,69 +1,86 @@
 import streamlit as st
-import streamlit as st
 
-# Custom CSS to inject for typography styles
-st.markdown("""
-<style>
-.main-header {
-    font-family: 'Helvetica', sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-}
-.project-title {
-    font-family: 'Helvetica', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-}
-.section-title {
-    font-family: 'Helvetica', serif;
-    font-size: 22px;
-    font-weight: bold;
-}
-.content-text {
-    font-family: 'Helvetica', sans-serif;
-    font-size: 18px;
-}
-.contact-text {
-    font-family: 'Helvetica', monospace;
-    font-size: 18px;
-}
-</style>
-""", unsafe_allow_html=True)
+st.set_page_config(page_title="Moni's Resume", layout="wide")
+st.title("Hi, I am Moni :wave:")
 
-# Page Configuration
-st.set_page_config(page_title="Moni's Personal Website", layout="wide")
+def create_project(title, subheader, description, image):
+    with st.container():
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            st.image(image)
+        with col2:
+            st.subheader(title)
+            st.markdown(f"**{subheader}**")
+            for desc in description:
+                st.write(f":gray[{desc}]")
 
-# Introduction
-st.markdown('<div class="main-header">Hi, I am Moni</div>', unsafe_allow_html=True)
-st.markdown("""
-<div class="content-text">A designer in Interior & Product & UX & HMI. Used to be an interior designer.
-Now doing some hardware and software product design with the aspiration of becoming a versatile designer capable of working across different disciplines.</div>
-""", unsafe_allow_html=True)
+with st.container():
+    col1, col2 = st.columns([2, 1])
+    with col1:
+        st.markdown(
+            "### A designer<br /> in Interior & Product & UX & HMI"
+        , unsafe_allow_html=True)
+        st.write("""
+        :gray[Used to be an interior designer.]\n
 
-# Projects
-st.markdown('<div class="section-title">Projects</div>', unsafe_allow_html=True)
-projects = {
-    "HMI Design: AutoShuttle": "This is an HMI & APP designed for an automatic driving shuttle aimed at assisting employees in facilities like Microsoft's campus for commuting short distances such as to and from work.",
-    "APP Design: Mini Program for Tai Koo Li Shopping Mall": "1. Book a parking space in advance to avoid blindly looking for a parking spot. 2. Personalized recommended parking spot. 3. Warm reminder when necessary.",
-    "Product Design: ClimaSphere": "It is an elegant and intuitive weather station that can be hung at the door to remind users to bring an umbrella when they go out.",
-    "Interior Design: NDB Headquarters Building Interior Design": "The New Development Bank is a multinational bank headquarter located at Shanghai Expo Park completed in 2022."
-}
+        :gray[Now doing some hardware and software product design, with the aspiration of becoming a versatile designer capable of working across different disciplines.]
+        """)
+    with col2:
+        st.image("images/Me.jpg")
 
-for title, desc in projects.items():
-    st.markdown(f'<div class="project-title">{title}</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="content-text">{desc}</div>', unsafe_allow_html=True)
+st.write("---")
 
-# Skills
-st.markdown('<div class="section-title">Skills</div>', unsafe_allow_html=True)
-st.markdown("""
-<div class="content-text">CAD / PS / Indesign / AI<br>
-Rhino / Sketchup /<br>
-Figma<br>
-Python</div>
-""", unsafe_allow_html=True)
+st.header("Projects")
 
-# Contact
-st.markdown('<div class="section-title">Contact</div>', unsafe_allow_html=True)
-st.markdown('<div class="contact-text">monihuangpro@gmail.com</div>', unsafe_allow_html=True)
+projects = [
+    {
+        "title": "HMI Design",
+        "subheader": "AutoShuttle",
+        "description": [
+            "This is an HMI & APP designed for an automatic driving shuttle, aimed at assisting employees in facilities like Microsoft's campus for commuting short distances, such as to and from work."
+        ],
+        "image": "images/HMI.jpg"
+    },
+    {
+        "title": "APP Design",
+        "subheader": "Mini Program for Tai Koo Li Shopping Mall",
+        "description": [
+            "1. Book a parking space in advance to avoid blindly looking for a parking spot.",
+            "2. Personalized recommended parking spot.",
+            "3. Alarm reminder when necessary."
+        ],
+        "image": "images/APP.jpg"
+    },
+    {
+        "title": "Product Design",
+        "subheader": "ClimaSphere",
+        "description": [
+            "It is an elegant and intuitive weather station that can be hung at the door to remind users to bring an umbrella when they go out."
+        ],
+        "image": "images/Product.jpg"
+    },
+    {
+        "title": "Interior Design",
+        "subheader": "NDB Headquarters Building Interior Design",
+        "description": [
+            "The New Development Bank is a multinational bank headquarters located at Shanghai Expo Park, completed in 2022."
+        ],
+        "image": "images/Interior.jpg"
+    }
+]
 
+for project in projects:
+    create_project(project["title"], project["subheader"], project["description"], project["image"])
 
+st.write("---")
+
+with st.container():
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st.header("Skills")
+        st.write("- **CAD / PS / InDesign / AI**")
+        st.write("- **Rhino / Sketchup / Figma**")
+        st.write("- **Python**")
+    with col2:
+        st.header("Contact")
+        st.write("monihuangpro@gmail.com")
